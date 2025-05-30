@@ -2,7 +2,7 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_PIPER_API;
 
 // Create an Axios instance
-axios.defaults.baseURL = BASE_URL;
+axios.defaults.baseURL = "/api";
 // const token = localStorage.getItem("piper-token");
 const setAuthToken = (token) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

@@ -2,16 +2,21 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import getmarchents from "../../api/getmarchents";
 import { LuTicket } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import ConvertToMMT from "../ConvertToMMT";
+// import ConvertToMMT from "../ConvertToMMT";
 
 const MarchentTable = forwardRef((props, ref) => {
+  const [loading, setLoading] = useState(false);
   const { search } = props;
   const navigate = useNavigate();
   const [rows, setRows] = useState([]);
   const getMarchents = async () => {
+    setLoading(true);
     const res = await getmarchents();
     console.log(res);
-    setRows(res.data.reverse());
+    if (res.code === 200) {
+      setLoading(false);
+      setRows(res.data.reverse());
+    }
   };
 
   useImperativeHandle(ref, () => ({
@@ -22,8 +27,6 @@ const MarchentTable = forwardRef((props, ref) => {
   }));
 
   const handleSearch = (name) => {
-    console.log(name);
-
     if (name) {
       const filteredRows = rows.filter((row) =>
         row.merchant.toLowerCase().includes(name.toLowerCase())
@@ -38,6 +41,14 @@ const MarchentTable = forwardRef((props, ref) => {
     getMarchents();
   }, [props]);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto bg-secondary p-4  w-full rounded-lg">
       <div className="w-full bg-secondary h-1/3 overflow-y-auto max-h-[70vh]">
@@ -48,7 +59,7 @@ const MarchentTable = forwardRef((props, ref) => {
               <th className="py-4 px-4 font-medium">Merchant Name</th>
               <th className="py-4 px-4 font-medium">Accounts Num</th>
               <th className="py-4 px-4 font-medium">Duration</th>
-              <th className="py-4 px-4 font-medium">Purchase Date</th>
+              {/* <th className="py-4 px-4 font-medium">Purchase Date</th> */}
               <th className="py-4 px-4 font-medium">Actions</th>
             </tr>
           </thead>
@@ -58,7 +69,7 @@ const MarchentTable = forwardRef((props, ref) => {
               <td className="py-2 px-4"></td>
               <td className="py-2 px-4"></td>
               <td className="py-2 px-4"></td>
-              <td className="py-2 px-4"></td>
+              {/* <td className="py-2 px-4"></td> */}
               <td className="py-2 px-4"></td>
             </tr>
             {rows &&
@@ -70,15 +81,15 @@ const MarchentTable = forwardRef((props, ref) => {
                 >
                   <td className="py-2 px-4">{index + 1}</td>
                   <td className="py-2 px-4">{item.merchant}</td>
-                  <td className="py-2 px-4">{item.quantity}</td>
+                  <td className="py-2 px-4">{item.codeCount} Accs</td>
                   <td className="py-2 px-4">{item.lifespan}</td>
-                  <td className="py-2 px-4">
+                  {/* <td className="py-2 px-4">
                     {<ConvertToMMT utc={item.purchaseDate} />}
-                  </td>
+                  </td> */}
                   <td className="py-2 px-4">
                     <button
                       onClick={() => {
-                        navigate(`/merchant-detail/${item.id}`);
+                        navigate(`/merchant-detail/${item._id}`);
                       }}
                       className="flex items-center px-4 py-2 text-[14px] gap-4 bg-white text-black py-1 px-3 rounded-lg hover:bg-black hover:text-white hover:border-white border-2"
                     >

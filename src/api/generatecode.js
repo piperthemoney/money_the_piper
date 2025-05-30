@@ -5,7 +5,7 @@ import { toast } from "sonner";
 const generateCode = async (data) => {
   const toastId = toast.loading("Code generating...");
   try {
-    const res = await axios.post("api/v1/regular-users", data);
+    const res = await axios.post("api/v1/iron", data);
     toast.success("Code generated successfully", {
       id: toastId,
       autoClose: 500, // Auto-close the toast after 5 seconds

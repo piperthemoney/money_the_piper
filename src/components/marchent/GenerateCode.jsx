@@ -29,6 +29,7 @@ const GenerateCode = ({ closeSidebar }) => {
       batchName,
     };
     const res = await generateCode(data);
+    // console.log(res);
     if (res.code === 201) {
       closeSidebar();
       setMerchant("");
@@ -202,12 +203,6 @@ const GenerateCode = ({ closeSidebar }) => {
       </div>
     </div>
   );
-};
-
-import PropTypes from "prop-types";
-
-GenerateCode.propTypes = {
-  closeSidebar: PropTypes.func.isRequired,
 };
 
 export default GenerateCode;

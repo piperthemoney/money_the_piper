@@ -1,5 +1,5 @@
 // import ServerLinkList from "./ServerLInkList";
-import ServerPing from "./ServerPing";
+// import ServerPing from "./ServerPing";
 
 function ServerLink() {
   return (
@@ -7,7 +7,7 @@ function ServerLink() {
       <p className="text-2xl font-medium">Server List</p>
 
       {/* <ServerLinkList /> */}
-      <ServerPing />
+      {/* <ServerPing /> */}
     </div>
   );
 }

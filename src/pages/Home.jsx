@@ -18,14 +18,14 @@ function Home() {
       <SnackbarProvider maxSnack={3}>
         <div className="flex-1 py-4">
           <Routes>
-            <Route path="/" element={<DashBoard />} />
+            {/* <Route path="/" element={<DashBoard />} /> */}
             {/* <Route path="/cloud" element={<CloudflareAnalytics />} /> */}
-            <Route path="/acc" element={<AccList />} />
+            <Route path="/" element={<AccList />} />
             <Route path="/code" element={<GenerateCode />} />
             <Route path="/merchant-detail/:id" element={<MarchentDetail />} />
-            <Route path="/batch" element={<Server />} />
-            <Route path="/batch-detail/:id" element={<ServerDetail />} />
-            <Route path="/server" element={<ServerLink />} />
+            {/* <Route path="/batch" element={<Server />} /> */}
+            {/* <Route path="/batch-detail/:id" element={<ServerDetail />} /> */}
+            {/* <Route path="/server" element={<ServerLink />} /> */}
           </Routes>
         </div>
       </SnackbarProvider>
